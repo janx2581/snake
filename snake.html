@@ -6,29 +6,29 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      background: #1a1a2e;
+      background: #000;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
       font-family: 'Segoe UI', sans-serif;
-      color: #eee;
+      color: #fff;
     }
-    h1 { margin-bottom: 10px; font-size: 2rem; letter-spacing: 3px; color: #e94560; }
+    h1 { margin-bottom: 10px; font-size: 2rem; letter-spacing: 3px; color: #fff; }
     #score-board {
       display: flex;
       gap: 40px;
       margin-bottom: 12px;
       font-size: 1.1rem;
     }
-    #score-board span { color: #a8dadc; }
+    #score-board span { color: #aaa; }
     #score-board b { color: #fff; }
     canvas {
-      border: 3px solid #e94560;
+      border: 3px solid #fff;
       border-radius: 6px;
-      background: #16213e;
-      box-shadow: 0 0 30px rgba(233,69,96,0.4);
+      background: #111;
+      box-shadow: 0 0 30px rgba(255,255,255,0.15);
     }
     #overlay {
       position: absolute;
@@ -38,20 +38,20 @@
       justify-content: center;
       gap: 16px;
     }
-    #overlay h2 { font-size: 2.5rem; color: #e94560; }
-    #overlay p { color: #a8dadc; font-size: 1.1rem; }
+    #overlay h2 { font-size: 2.5rem; color: #fff; }
+    #overlay p { color: #aaa; font-size: 1.1rem; }
     button {
       padding: 12px 32px;
       font-size: 1rem;
-      background: #e94560;
-      color: white;
+      background: #fff;
+      color: #000;
       border: none;
       border-radius: 6px;
       cursor: pointer;
       letter-spacing: 1px;
       transition: background 0.2s;
     }
-    button:hover { background: #c73652; }
+    button:hover { background: #ccc; }
     #controls { margin-top: 12px; font-size: 0.85rem; color: #555; }
   </style>
 </head>
@@ -145,7 +145,7 @@
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // Grid
-      ctx.strokeStyle = 'rgba(255,255,255,0.03)';
+      ctx.strokeStyle = 'rgba(255,255,255,0.06)';
       for (let x = 0; x <= COLS; x++) {
         ctx.beginPath(); ctx.moveTo(x * CELL, 0); ctx.lineTo(x * CELL, canvas.height); ctx.stroke();
       }
@@ -156,9 +156,9 @@
       // Food (pulsing apple)
       const pulse = 0.8 + 0.2 * Math.sin(Date.now() / 200);
       ctx.save();
-      ctx.shadowColor = '#ff4757';
+      ctx.shadowColor = '#fff';
       ctx.shadowBlur = 15;
-      ctx.fillStyle = '#ff4757';
+      ctx.fillStyle = '#fff';
       ctx.beginPath();
       const fx = food.x * CELL + CELL / 2;
       const fy = food.y * CELL + CELL / 2;
@@ -169,8 +169,8 @@
       // Snake body
       for (let i = snake.length - 1; i >= 1; i--) {
         const t = 1 - (i / snake.length) * 0.6;
-        ctx.fillStyle = `rgba(72, 199, 142, ${t})`;
-        ctx.strokeStyle = 'rgba(0,0,0,0.3)';
+        ctx.fillStyle = `rgba(255, 255, 255, ${t})`;
+        ctx.strokeStyle = 'rgba(0,0,0,0.4)';
         ctx.lineWidth = 1;
         const r = 4;
         const bx = snake[i].x * CELL + 1;
@@ -203,7 +203,7 @@
         const size = CELL - 2;
         ctx.drawImage(headImg, -size / 2, -size / 2, size, size);
       } else {
-        ctx.fillStyle = '#48c78e';
+        ctx.fillStyle = '#fff';
         ctx.fill();
       }
       ctx.restore();
@@ -211,7 +211,7 @@
       // Head border
       ctx.beginPath();
       ctx.arc(hx + CELL / 2, hy + CELL / 2, CELL / 2 - 1, 0, Math.PI * 2);
-      ctx.strokeStyle = '#48c78e';
+      ctx.strokeStyle = '#fff';
       ctx.lineWidth = 2;
       ctx.stroke();
     }
